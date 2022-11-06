@@ -5,7 +5,7 @@ const db = config.get('mongoURI');
 const connectDB = async () => {
     try{
         await mongoos.connect(db, {
-            useNewUrlParser: true
+            useNewUrlParser: true // <-- no longer necessary " https://mongoosejs.com/docs/migrating_to_6.html#no-more-deprecation-warning-options"
         }); 
 
         console.log('MongoDB is conneted...');
