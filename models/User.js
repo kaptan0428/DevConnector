@@ -1,5 +1,7 @@
 const mongoos = require('mongoose'); 
 
+
+// Each schema maps to a MongoDB collection and defines the shape of the documents within that collection.
 const UserSchema = new mongoos.Schema({
     name: {
         type: String, 
@@ -23,4 +25,6 @@ const UserSchema = new mongoos.Schema({
     }
 }); 
 
+// The mongoose.model() function of the mongoose module is used to create a collection of a particular database of MongoDB.
+// so Creating collection
 module.exports = User = mongoos.model('User', UserSchema); 
