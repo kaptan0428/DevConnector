@@ -8,7 +8,7 @@ const connectDB = async () => {
             useNewUrlParser: true // <-- no longer necessary " https://mongoosejs.com/docs/migrating_to_6.html#no-more-deprecation-warning-options"
         }); 
 
-        console.log('MongoDB is conneted...');
+        console.log('MongoDB is connected...');
 
     } catch(err) {
         console.error(err.message);

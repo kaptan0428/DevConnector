@@ -27,4 +27,4 @@ const UserSchema = new mongoos.Schema({
 
 // The mongoose.model() function of the mongoose module is used to create a collection of a particular database of MongoDB.
 // so Creating collection
-module.exports = User = mongoos.model('User', UserSchema); 
+module.exports = User = mongoos.model('user', UserSchema); 
