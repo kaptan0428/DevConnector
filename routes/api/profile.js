@@ -1,7 +1,7 @@
 const express = require('express'); 
 const request = require('request'); 
 const config = require('config'); 
-const router = express.Router();
+const router = express.Router(); // The `express.Router()` function is used to create a new router object.
 const auth = require('../../middleware/auth'); 
 const {check, validationProfile, validationResult} = require('express-validator')
 

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const gravatar = require('gravatar'); 
-const bcrypt = require('bcryptjs'); 
+const bcrypt = require('bcryptjs'); // Optimized bcrypt in JavaScript with zero dependencies.
 const jwt = require('jsonwebtoken'); 
 const config = require('config'); 
 const { check, validationResult } = require("express-validator");
@@ -52,7 +52,7 @@ router.post(
         });
 
         // Encrypt Paasword (uisng bcryptjs)
-        const salt = await bcrypt.genSalt(10); 
+        const salt = await bcrypt.genSalt(10); // salting: Salting is simply the addition of a unique, random string of characters known only to the site to each password before it is hashed  
 
         user.password = await bcrypt.hash(password, salt); 
 
