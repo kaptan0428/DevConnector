@@ -7,7 +7,7 @@ const Post = require('../../models/Post');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 
-// @route   GET api/post
+// @route   POST api/post
 // @desc    Create a post
 // @access  Private
 router.post(
@@ -42,5 +42,73 @@ router.post(
     
   }
 );
+
+// @route   GET api/post
+// @desc    Get a post
+// @access  Private
+router.get('/', auth, async(req, res) => {
+    try {
+        const posts = await Post.find().sort({date: -1}); 
+        res.json(posts); 
+    } catch (err) {
+        console.error(err.meassage);
+        res.status(500).send('Server Error'); 
+    }
+});
+
+
+// @route   GET api/post/:id
+// @desc    Get a post by ID
+// @access  Private
+router.get('/:id', auth, async(req, res) => {
+    
+    try {
+        const post = await Post.findById(req.params.id); 
+
+        if(!post) {
+            return res.status(404).json({msg: 'Post not found'}); 
+        }
+
+        res.json(post); 
+    } catch (err) {
+
+        console.error(err.meassage);
+
+        if(err.kind === 'ObjectId') {
+            return res.status(404).json({msg: 'Post not found'}); 
+        }
+
+        res.status(500).send('Server Error'); 
+    }
+});
+
+// @route   DELETE api/post/:id
+// @desc    Delete a post
+// @access  Private
+router.delete('/:id', auth, async(req, res) => {
+    try {
+        const post = await Post.findById(req.params.id); 
+
+        // If post does't exist
+        if(!post) {
+            return res.status(404).json({msg: 'Post not found'}); 
+        }
+
+        // check User
+        if(post.user.toString() !== req.user.id) {
+            return res.status(401).json({msg: 'User not authorised'}); 
+        }
+        await post.remove();       
+  
+        res.json({msg: 'Post is removed'}); 
+    } catch (err) {
+        console.error(err.meassage);
+
+        if(err.kind === 'ObjectId') {
+            return res.status(404).json({msg: 'Post not found'}); 
+        }
+        res.status(500).send('Server Error'); 
+    }
+});
 
 module.exports = router;
