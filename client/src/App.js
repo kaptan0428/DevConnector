@@ -23,12 +23,10 @@ const App = () => (
         </Routes>
         <section className="container">
           <Alert />
-          <switch>
             <Routes>
               <Route exact path="/register" element={<Register />} />
               <Route exact path="/login" element={<Login />} />
             </Routes>
-          </switch>
         </section>
       </Fragment>
     </Router>
